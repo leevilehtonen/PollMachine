@@ -1,5 +1,7 @@
 package com.pollmachine.main;
 
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
 
 public class PollMachine implements Runnable{
@@ -9,6 +11,8 @@ public class PollMachine implements Runnable{
 	public PollMachine() {
 		
 		frame = new JFrame();
+		frame.setPreferredSize(new Dimension(200, 400));
+		
 		
 		// TODO Auto-generated constructor stub
 	}
