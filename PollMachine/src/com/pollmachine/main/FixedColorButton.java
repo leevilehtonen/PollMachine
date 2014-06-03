@@ -7,16 +7,17 @@ import javax.swing.JButton;
 
 public class FixedColorButton extends JButton{
 	
-	public FixedColorButton(String text) {
+	private static final long serialVersionUID = 1L;
+	
+	
+	public FixedColorButton(String text, String colour) {
+		
 		super(text);
 		super.setBackground(new Color(Integer.parseInt("525252", 16)));
 		super.setForeground(new Color(Integer.parseInt("ffffff", 16)));
 		super.setFocusPainted(false);
 		super.setBorderPainted(false);
 		super.setContentAreaFilled(false);
-		
-		
-		
 		
 	}
 	protected void paintComponent(Graphics g) {
