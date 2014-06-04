@@ -22,7 +22,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
-import com.sun.awt.AWTUtilities;
 
 public class PollMachine implements Runnable {
 
@@ -37,7 +36,7 @@ public class PollMachine implements Runnable {
 		frame = new JFrame("Welcome");
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setUndecorated(true);
-		AWTUtilities.setWindowShape(frame, new RoundRectangle2D.Double(0, 0,
+	frame.setShape(new RoundRectangle2D.Double(0, 0,
 				300, 400, 20, 20));
 		frame.setPreferredSize(new Dimension(300, 400));
 		createComponents(frame.getContentPane());
@@ -136,7 +135,9 @@ public class PollMachine implements Runnable {
 
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("Login");
-
+				
+				boolean correctInfo = false;
+				
 				for (User user : users.keySet()) {
 					if (user.getName().equals(usernameField.getText())) {
 						String givenPassword = "";
@@ -152,13 +153,16 @@ public class PollMachine implements Runnable {
 							MainMenuScreen mainMenuScreen = new MainMenuScreen(user);
 							SwingUtilities.invokeLater(mainMenuScreen);
 							frame.dispose();
-						}
+							correctInfo = true;
+						} 
 					}
 				}
-				new MessageFrame("Wrong username or password");
-				usernameField.setText("");
-				passwordField.setText("");
 				
+				if (!correctInfo) {
+					SwingUtilities.invokeLater(new MessageFrame("Wrong username or password"));
+					usernameField.setText("");
+					passwordField.setText("");
+				}
 			}
 		});
 		container.add(loginBtn, constraints);
@@ -192,7 +196,7 @@ public class PollMachine implements Runnable {
 					usernameField.setText("");
 					passwordField.setText("");
 
-					new MessageFrame("Registeration completed!");
+					SwingUtilities.invokeLater(new MessageFrame("Registeration completed!"));
 
 				} else {
 					usernameField.setForeground(Color.RED);

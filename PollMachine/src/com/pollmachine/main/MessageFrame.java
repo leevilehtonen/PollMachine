@@ -14,26 +14,32 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 
-import com.sun.awt.AWTUtilities;
 
-public class MessageFrame extends JFrame{
+public class MessageFrame implements Runnable{
 
-	private static final long serialVersionUID = 1L;
 	private String message;
-	
+	private JFrame frame;
 	
 	public MessageFrame(String message) {
-		super("Completed");
+
 		this.message = message;
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setUndecorated(true);
-		AWTUtilities.setWindowShape(this, new RoundRectangle2D.Double(0, 0,
-				250, 150, 10, 10));
-		setPreferredSize(new Dimension(250, 100));
-		createComponents(this.getContentPane());
-		pack();
-		setVisible(true);
-		setLocationRelativeTo(null);
+		
+	}
+	
+	@Override
+	public void run() {
+		frame = new JFrame("Completed");
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		frame.setUndecorated(true);
+		frame.setShape(new RoundRectangle2D.Double(0, 0,
+				250, 100, 10, 10));
+		frame.setPreferredSize(new Dimension(250, 100));
+		createComponents(frame.getContentPane());
+		frame.pack();
+		frame.setVisible(true);
+		frame.setLocationRelativeTo(null);
+		// TODO Auto-generated method stub
+		
 	}
 
 	private void createComponents(Container container) {
@@ -65,7 +71,7 @@ public class MessageFrame extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				dispose();
+				frame.dispose();
 				
 			}
 		});

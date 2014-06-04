@@ -1,14 +1,17 @@
 package com.pollmachine.main;
 
+import java.util.ArrayList;
+
 public class User {
 	
 	private String name;
-	private int answeredPolls;
 	private int createdPolls;
+	private ArrayList<Poll> answeredPolls;
+	
 	
 	public User(String name) {
 		this.name = name;
-		this.answeredPolls = 0;
+		this.answeredPolls = new ArrayList<Poll>();
 		this.createdPolls = 0;
 	}
 	public String getName() {
@@ -17,13 +20,16 @@ public class User {
 	public void createPoll () {
 		createdPolls++;
 	}
-	public void answerPoll () {
-		answeredPolls++;
+	public void answerPoll (Poll pool) {
+		answeredPolls.add(pool);
 	}
-	public int getAnsweredPolls() {
-		return answeredPolls;
+	public int getAnsweredPollsAmount() {
+		return answeredPolls.size();
 	}
 	public int getCreatedPolls() {
 		return createdPolls;
+	}
+	public ArrayList<Poll> getAnsweredPolls() {
+		return answeredPolls;
 	}
 }
